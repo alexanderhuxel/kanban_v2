@@ -151,11 +151,16 @@ module.exports = {
         200: "#111011",
       },
 
-      purple: {
-        100: "#F680FE",
-        200: "#C947Ea",
-        300: "#452759",
+      blue: {
+        100: "#0747a6",
+        200: "#0049b0",
       },
+      gray: {
+        100: "#f4f5f7",
+        200: "#5e6c84",
+      },
+      yellow: "#ffe380",
+      max: "#ffab00",
       red: "#F10002",
 
       transparent: "transparent",
