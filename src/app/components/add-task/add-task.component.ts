@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Task } from 'src/models/task';
 @Component({
   selector: 'app-add-task',
   templateUrl: './add-task.component.html',
@@ -8,24 +9,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class AddTaskComponent implements OnInit {
   constructor() {}
 
-  taskForm = new FormGroup({
-    title: new FormControl('Nancy', Validators.minLength(2)),
-    category: new FormControl('Drew'),
-    description: new FormControl('Drew'),
-    date: new FormControl('Drew'),
-    importance: new FormControl('Drew'),
-  });
+  task = new Task();
 
-  task = {
-    title: '',
-    category: '',
-    description: '',
-    date: '',
-    importance: '',
-    done: false,
-  };
-
-  test() {
+  getNewTaskObject() {
     console.log(this.task);
   }
 
