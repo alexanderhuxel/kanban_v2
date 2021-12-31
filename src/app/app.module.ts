@@ -14,12 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
-import {
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [AppComponent, BoardComponent, HelpComponent, AddTaskComponent],
   imports: [
@@ -30,14 +25,11 @@ import {
     FontAwesomeModule,
     MatFormFieldModule,
     MatSelectModule,
-    FormControl,
-    FormGroup,
-    ReactiveFormsModule,
+    FormsModule,
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatButtonModule,
-    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
