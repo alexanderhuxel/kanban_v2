@@ -1,6 +1,6 @@
 export class Task {
   title: string;
-  category: string;
+  column: string;
   description: string;
   date: string;
   importance: string;
@@ -8,7 +8,7 @@ export class Task {
 
   constructor(obj?: any) {
     this.title = obj ? obj.title : '';
-    this.category = obj ? obj.category : '';
+    this.column = obj ? obj.column : '';
     this.description = obj ? obj.description : '';
     this.date = obj ? obj.date : '';
     this.importance = obj ? obj.importance : '';
@@ -16,11 +16,13 @@ export class Task {
   }
 
   objectToJSON() {
-    title: this.title;
-    category: this.category;
-    description: this.description;
-    date: this.date;
-    importance: this.importance;
-    done: this.done;
+    return {
+      title: this.title,
+      column: this.column,
+      description: this.description,
+      date: this.date,
+      importance: this.importance,
+      done: this.done,
+    };
   }
 }
