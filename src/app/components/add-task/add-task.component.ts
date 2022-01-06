@@ -1,17 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  Firestore,
-  addDoc,
-  collection,
-  collectionData,
-  doc,
-  docData,
-  deleteDoc,
-  updateDoc,
-  collectionChanges,
-  DocumentReference,
-  setDoc,
-} from '@angular/fire/firestore';
+import { Firestore } from '@angular/fire/firestore';
+import { DatabaseService } from 'src/app/services/database.service';
 
 // import { Observable } from 'rxjs';
 import { Task } from 'src/models/task';
@@ -31,16 +20,8 @@ import { Task } from 'src/models/task';
 })
 export class AddTaskComponent implements OnInit {
   task: Task = new Task();
-  // item$: Observable<Item[]>;
 
-  constructor(private firestore: Firestore) {}
+  constructor(private firestore: Firestore, public database: DatabaseService) {}
 
-  addToDatabase() {
-    // TODO: change "teamBoardAlex to userBoard"
-    const nestedPath = '/teamBoardAlex/board/' + this.task.column;
-    const databasePath: any = collection(this.firestore, nestedPath);
-    const newTask = this.task.objectToJSON();
-    return addDoc(databasePath, newTask);
-  }
   ngOnInit(): void {}
 }
