@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { DatabaseService } from 'src/app/services/database.service';
-import { Task } from 'src/models/task';
 
 @Component({
   selector: 'app-board',
@@ -9,22 +8,20 @@ import { Task } from 'src/models/task';
   styleUrls: ['./board.component.scss'],
 })
 export class BoardComponent implements OnInit {
-  constructor(public database: DatabaseService) {}
   faPlus = faPlus;
-  object = {};
-  ToDo = this.database
-    .getBoard('To Do')
-    .subscribe((result) => console.log(result));
+  constructor(public database: DatabaseService) {}
 
-  inProgress = this.database
-    .getBoard('in Progress')
-    .subscribe((result) => console.log(result));
-
-  Done = this.database
-    .getBoard('Done')
-    .subscribe((result) => console.log(result));
-
-  ngOnInit(): void {
-    console.log(this.ToDo, this.inProgress, this.Done);
+  // get new Date from timestamp extract Date Month and year convert to formatet Datet und multipli with 1000
+  generateTime(timestamp: any) {
+    const date = new Date(timestamp * 1000);
+    const Day = date.getDate();
+    let Month = date.getMonth();
+    const Year = date.getFullYear();
+    if (Month == 0) {
+      Month++;
+    }
+    return Day + '/' + Month + '/' + Year;
   }
+
+  ngOnInit(): void {}
 }
