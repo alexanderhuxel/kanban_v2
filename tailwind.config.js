@@ -275,7 +275,7 @@ module.exports = {
         32: "256px",
       },
       minWidth: {
-        custom: "1012px",
+        custom: "352px",
       },
       minHeight: {
         0: "0",
