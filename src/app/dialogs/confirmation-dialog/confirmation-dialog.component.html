@@ -1,0 +1,15 @@
+<div>
+  <h2 class="text-h2 mb-0">Are you sure ?</h2>
+  <p class="text-red">Deleted Tasks ar lost forerver.</p>
+  <div class="w-full h-14 flex justify-end items-end gap-2">
+    <button mat-dialog-close mat-raised-button>Cancle</button>
+    <button
+      (click)="database.removeTask(data.path, data.id)"
+      type="submit"
+      mat-raised-button
+      color="warn"
+    >
+      <mat-spinner></mat-spinner>
+    </button>
+  </div>
+</div>

@@ -17,7 +17,10 @@ import { Task } from 'src/models/task';
 })
 export class DatabaseService {
   constructor(private firestore: Firestore) {}
-  Task = new Task();
+  Task: Task = new Task();
+  maxTask = false;
+  savingProcessingRunning = false;
+  savingSucess = false;
   firstRowArray: any = [];
   secondRowArray: any = [];
   thirdRowArray: any = [];
@@ -42,17 +45,23 @@ export class DatabaseService {
       'teamBoardAlex/board/' + path
     );
     if (this.secondRowArray.length == 3 && path == 'in Progress') {
-      alert(
-        'The Row you choosed is currently filled with 3 Task, change your Selection or reorder your Board!'
-      );
+      this.maxTask = true;
       return;
     } else {
-      return addDoc(collectionRef, Task.objectToJSON());
+      this.savingProcessingRunning = true;
+      addDoc(collectionRef, Task.objectToJSON()).then(() => {
+        this.savingProcessingRunning = false;
+        this.savingSucess = true;
+        return;
+      });
     }
   }
 
-  removeTask(Task: Task, id: string) {
-    const collectionRef = doc(this.firestore, `teamBoardAlex/${id}`);
+  removeTask(path: string, id: string) {
+    const collectionRef = doc(
+      this.firestore,
+      `teamBoardAlex/board/${path}/${id}`
+    );
     return deleteDoc(collectionRef);
   }
 
@@ -65,18 +74,17 @@ export class DatabaseService {
   }
 
   firstRow = this.getBoard('To Do').subscribe((result) => {
-    console.log(result);
     this.firstRowArray = result;
-    console.log(this.firstRowArray.length);
+    console.log(this.firstRowArray);
   });
 
   SecondRow = this.getBoard('in Progress').subscribe((result) => {
-    console.log(result);
     this.secondRowArray = result;
+    console.log(this.secondRowArray);
   });
 
   ThirdRow = this.getBoard('Done').subscribe((result) => {
-    console.log(result);
     this.thirdRowArray = result;
+    console.log(this.thirdRowArray);
   });
 }

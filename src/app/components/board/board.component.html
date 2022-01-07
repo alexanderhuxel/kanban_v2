@@ -2,23 +2,45 @@
   <h2 class="ml-4 pt-5 text-h4">Board</h2>
   <div class="flex h-screen bg-white-100">
     <div class="h-full min-w-custom bg-gray-100 ml-1 rounded-small">
-      <p class="ml-3 mt-3 mb-6 text-gray-200">
-        To Do {{ database.firstRowArray.length }}
-      </p>
+      <div class="flex justify-between mx-3 mt-3 mb-5">
+        <p class="text-gray-200">To Do {{ database.firstRowArray.length }}</p>
+        <button
+          (click)="openDialog('To Do')"
+          class="custom-addButton"
+          mat-mini-fab
+          color=""
+          matTooltip="add new Task"
+          aria-label="Example icon button with a filter list icon"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
       <div
         *ngFor="let Task of database.firstRowArray"
         class="bg-white-100 rounded-small mx-1 mb-1"
       >
         <span class="flex justify-between">
-          <p class="py-1 px-2 text-gray-200">{{ Task.title }}</p>
-          <p class="py-1 px-2 text-gray-200">
+          <p class="py-1 px-1 text-gray-200">{{ Task.title }}</p>
+          <p class="py-1 px-1 text-gray-200">
             {{ generateTime(Task.date.seconds) }}
           </p>
         </span>
-        <p class="py-2 px-2 text-gray-200">
+        <p class="pb-7 px-1 text-gray-200">
           {{ Task.description }}
         </p>
-        <div class="flex justify-between items-center mx-2 pb-1">
+        <div class="flex justify-end mx-0.5 mb-1.5">
+          <button
+            (click)="openConfirmationDialog('To Do', Task.id)"
+            class="custom-addButton"
+            mat-mini-fab
+            color=""
+            matTooltip="delete Task"
+            aria-label="Example icon button with a filter list icon"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+        <div class="flex justify-between items-center mx-1 pb-1">
           <p class="text-red">{{ Task.importance }}</p>
           <span class="flex items-center ml-2">
             <p class="text-gray-200 mr-1">Username</p>
@@ -40,26 +62,39 @@
       }"
       class="h-full min-w-custom ml-1 rounded-small"
     >
-      <span class="ml-3 mt-3 mb-5 flex items-center">
-        <p class="text-gray-200 mr-3">
-          in Progress {{ database.secondRowArray.length }}
-        </p>
-        <p class="rounded-button bg-max py-0.5 px-1">MAX 3</p>
-      </span>
+      <div class="flex justify-between mx-3 mt-3 mb-5">
+        <span class="flex items-center">
+          <p class="text-gray-200 mr-3">
+            in Progress {{ database.secondRowArray.length }}
+          </p>
+
+          <p class="rounded-button bg-max py-0.5 px-1">MAX 3</p>
+        </span>
+        <button
+          (click)="openDialog('in Progress')"
+          class="custom-addButton"
+          mat-mini-fab
+          color=""
+          matTooltip="add new Task"
+          aria-label="Example icon button with a filter list icon"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
       <div
         *ngFor="let Task of database.secondRowArray"
         class="bg-white-100 rounded-small mx-1 mb-1"
       >
         <span class="flex justify-between">
-          <p class="py-1 px-2 text-gray-200">{{ Task.title }}</p>
-          <p class="py-1 px-2 text-gray-200">
+          <p class="py-1 px-1 text-gray-200">{{ Task.title }}</p>
+          <p class="py-1 px-1 text-gray-200">
             {{ generateTime(Task.date.seconds) }}
           </p>
         </span>
-        <p class="py-2 px-2 text-gray-200">
+        <p class="pb-1 px-1 text-gray-200">
           {{ Task.description }}
         </p>
-        <div class="flex justify-between items-center mx-2 pb-1">
+        <div class="flex justify-between items-center mx-1 pb-1">
           <p class="text-red">{{ Task.importance }}</p>
           <span class="flex items-center ml-2">
             <p class="text-gray-200 mr-1">Username</p>
@@ -75,7 +110,7 @@
     </div>
 
     <div class="h-full min-w-custom bg-gray-100 mx-1 rounded-small">
-      <p class="ml-3 mt-3 mb-6 text-gray-200">
+      <p class="ml-3 mt-3 mb-5 text-gray-200">
         Done {{ database.thirdRowArray.length }}
       </p>
       <div
@@ -83,15 +118,15 @@
         class="bg-white-100 rounded-small mx-1 mb-1"
       >
         <span class="flex justify-between">
-          <p class="py-1 px-2 text-gray-200">{{ Task.title }}</p>
-          <p class="py-1 px-2 text-gray-200">
+          <p class="py-1 px-1 text-gray-200">{{ Task.title }}</p>
+          <p class="py-1 px-1 text-gray-200">
             {{ generateTime(Task.date.seconds) }}
           </p>
         </span>
-        <p class="py-2 px-2 text-gray-200">
+        <p class="pb-1 px-1 text-gray-200">
           {{ Task.description }}
         </p>
-        <div class="flex justify-between items-center mx-2 pb-1">
+        <div class="flex justify-between items-center mx-1 pb-1">
           <p class="text-red">{{ Task.importance }}</p>
           <span class="flex items-center ml-2">
             <p class="text-gray-200 mr-1">Username</p>

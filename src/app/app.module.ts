@@ -20,8 +20,20 @@ import { environment } from '../environments/environment';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialogModule } from '@angular/material/dialog';
+import { AddTasktoRowComponent } from './dialogs/add-taskto-row/add-taskto-row.component';
+import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog/confirmation-dialog.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @NgModule({
-  declarations: [AppComponent, BoardComponent, HelpComponent, AddTaskComponent],
+  declarations: [
+    AppComponent,
+    BoardComponent,
+    HelpComponent,
+    AddTaskComponent,
+    AddTasktoRowComponent,
+    ConfirmationDialogComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -34,8 +46,11 @@ import { MatIconModule } from '@angular/material/icon';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatDialogModule,
     MatButtonModule,
     MatIconModule,
+    MatTooltipModule,
+    MatProgressSpinnerModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),

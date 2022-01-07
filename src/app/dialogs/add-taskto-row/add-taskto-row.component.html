@@ -5,8 +5,6 @@
     class="h-full p-10 bg-gray-100 rounded-small m-1 grid grid-cols-1 lg:grid-cols-2 gap-2"
   >
     <!-- TODO: VALIDATE FORM  -->
-    <!-- TODO: MAX TASK is VALIDATTET -->
-    <!-- TODO: TASK SUCESS is VALIDATET -->
     <div>
       <div>
         <p class="mb-1">Title</p>
@@ -20,16 +18,14 @@
         <p class="mb-1">Column</p>
         <mat-form-field class="w-full" appearance="fill">
           <mat-label>Column</mat-label>
-          <select
+          <input
             id="category"
             name="category"
-            [(ngModel)]="task.column"
+            [(ngModel)]="data.column"
             matNativeControl
+            readonly
             required
-          >
-            <option value="To Do">To Do</option>
-            <option value="in Progress">in Progress</option>
-          </select>
+          />
         </mat-form-field>
       </div>
 
@@ -85,16 +81,23 @@
       </div>
 
       <div class="w-full h-14 flex justify-end items-end gap-2">
-        <button mat-raised-button>Cancle</button>
-        <button type="submit" mat-raised-button color="primary">Add</button>
+        <button mat-dialog-close mat-raised-button>Cancle</button>
+        <button
+          type="submit"
+          [disabled]="database.savingProcessingRunning"
+          mat-raised-button
+          color="primary"
+        >
+          Add
+        </button>
       </div>
     </div>
-
     <div *ngIf="database.savingSucess">
       <p class="text-blue-200 shadow-small p-2 rounded">
         Your Task has ben sucessfull created
       </p>
     </div>
+
     <div *ngIf="database.maxTask">
       <p class="text-red shadow-small p-2 rounded">
         The Row you choosed is currently filled with 3 Task, change your

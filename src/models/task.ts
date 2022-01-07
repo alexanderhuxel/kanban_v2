@@ -5,6 +5,7 @@ export class Task {
   date: string;
   importance: string;
   done: boolean;
+  id: string;
 
   constructor(obj?: any) {
     this.title = obj ? obj.title : '';
@@ -13,6 +14,7 @@ export class Task {
     this.date = obj ? obj.date : '';
     this.importance = obj ? obj.importance : '';
     this.done = obj ? obj.done : '';
+    this.id = obj ? obj.id : '';
   }
 
   objectToJSON() {
@@ -22,7 +24,8 @@ export class Task {
       description: this.description,
       date: this.date,
       importance: this.importance,
-      done: this.done,
+      done: false,
+      id: this.id,
     };
   }
 }
