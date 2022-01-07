@@ -1,8 +1,8 @@
 <div class="bg-white-100 h-full">
   <h2 class="ml-4 pt-5 text-h4">Add new Task</h2>
   <form
-    (submit)="database.addToDatabase(task, 'To Do')"
-    class="h-full p-10 bg-gray-100 rounded-small m-1 grid grid-cols-2 gap-2"
+    (submit)="database.addToDatabase(task, task.column)"
+    class="h-full p-10 bg-gray-100 rounded-small m-1 grid grid-cols-1 lg:grid-cols-2 gap-2"
   >
     <div>
       <div>
@@ -83,9 +83,7 @@
 
       <div class="w-full h-14 flex justify-end items-end gap-2">
         <button mat-raised-button>Cancle</button>
-        <button [disabled]="" type="submit" mat-raised-button color="primary">
-          Add
-        </button>
+        <button type="submit" mat-raised-button color="primary">Add</button>
       </div>
     </div>
   </form>
