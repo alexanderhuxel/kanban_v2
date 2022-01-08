@@ -19,8 +19,9 @@ export class DatabaseService {
   constructor(private firestore: Firestore) {}
   Task: Task = new Task();
   maxTask = false;
-  savingProcessingRunning = false;
-  savingSucess = false;
+  workingProcessRunning = false;
+  workingDone = false;
+  DialogOpen = false;
   firstRowArray: any = [];
   secondRowArray: any = [];
   thirdRowArray: any = [];
@@ -33,8 +34,11 @@ export class DatabaseService {
     return collectionData(collectionRef, { idField: 'id' });
   }
 
-  getTaskByID(id: string) {
-    const collectionDocRef = doc(this.firestore, `teamBoardAlex/${id}`);
+  getTaskByID(path: string, id: string) {
+    const collectionDocRef = doc(
+      this.firestore,
+      `teamBoardAlex/board/${path}/${id}`
+    );
     return docData(collectionDocRef, { idField: 'id' });
   }
 
@@ -48,10 +52,10 @@ export class DatabaseService {
       this.maxTask = true;
       return;
     } else {
-      this.savingProcessingRunning = true;
+      this.workingProcessRunning = true;
       addDoc(collectionRef, Task.objectToJSON()).then(() => {
-        this.savingProcessingRunning = false;
-        this.savingSucess = true;
+        this.workingProcessRunning = false;
+        this.workingDone = true;
         return;
       });
     }
@@ -62,14 +66,33 @@ export class DatabaseService {
       this.firestore,
       `teamBoardAlex/board/${path}/${id}`
     );
-    return deleteDoc(collectionRef);
+    deleteDoc(collectionRef).then(() => {
+      this.workingProcessRunning = true;
+      this.workingDone = true;
+      setTimeout(() => {
+        this.workingProcessRunning = false;
+        return;
+      }, 1000);
+    });
   }
 
-  updateTask(Task: Task, id: string) {
-    const CollectionDocRef = doc(this.firestore, `teamBoardAlex/${id}`);
-    return updateDoc(CollectionDocRef, {
-      titel: Task.title,
-      text: Task.description,
+  updateTask(Task: Task, path: string, id: string) {
+    const CollectionDocRef = doc(
+      this.firestore,
+      `teamBoardAlex/board/${path}/${id}`
+    );
+    updateDoc(CollectionDocRef, {
+      title: Task.title,
+      description: Task.description,
+      date: Task.description,
+      importance: Task.importance,
+    }).then(() => {
+      this.workingProcessRunning = true;
+      this.workingDone = true;
+      setTimeout(() => {
+        this.workingProcessRunning = false;
+        return;
+      }, 1000);
     });
   }
 
