@@ -1,0 +1,111 @@
+<div>
+  <h2 class="text-h2">Update Task</h2>
+  <form
+    *ngIf="loading"
+    (submit)="updateTask()"
+    class="h-full p-10 bg-gray-100 rounded-small m-1 grid grid-cols-1 lg:grid-cols-2 gap-2"
+  >
+    <!-- TODO: VALIDATE FORM  -->
+    <!-- TODO: MAX TASK is VALIDATTET -->
+    <!-- TODO: TASK SUCESS is VALIDATET -->
+    <div>
+      <div>
+        <p class="mb-1">Title</p>
+        <mat-form-field class="w-full" appearance="fill">
+          <mat-label>Title</mat-label>
+          <input
+            id="title"
+            name="title"
+            [(ngModel)]="currentObj[0].title"
+            matInput
+          />
+        </mat-form-field>
+      </div>
+
+      <div>
+        <p class="mb-1">Description</p>
+        <mat-form-field class="w-full" appearance="fill">
+          <mat-label>Description</mat-label>
+          <textarea
+            id="description"
+            name="description"
+            [(ngModel)]="currentObj[0].description"
+            matInput
+          ></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div>
+      <div>
+        <p class="mb-1">Choose a Date</p>
+        <mat-form-field class="w-full" appearance="fill">
+          <mat-label>Choose a date</mat-label>
+          <input
+            id="date"
+            name="date"
+            [(ngModel)]="this.date[0].seconds"
+            matInput
+            [matDatepicker]="picker"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="mb-2">
+        <p class="mb-1">Importance</p>
+        <mat-form-field class="w-full" appearance="fill">
+          <mat-label>Importance</mat-label>
+          <select
+            id="importance"
+            name="importance"
+            [(ngModel)]="currentObj[0].importance"
+            matNativeControl
+            required
+          >
+            <option value="high">High</option>
+            <option value="low">Low</option>
+          </select>
+        </mat-form-field>
+      </div>
+
+      <div class="w-full h-14 flex justify-end items-end gap-2">
+        <button
+          [disabled]="database.workingProcessRunning"
+          [ngClass]="{
+            'bg-blue-100': database.workingDone,
+            'text-white-100': database.workingDone
+          }"
+          mat-dialog-close
+          mat-raised-button
+        >
+          <div *ngIf="!database.workingDone">Cancle</div>
+          <div *ngIf="database.workingDone">Close</div>
+        </button>
+
+        <button
+          [disabled]="database.workingDone && !database.workingProcessRunning"
+          [ngClass]="{ 'bg-blue-100': !database.workingDone }"
+          class="text-white-100"
+          type="submit"
+          mat-raised-button
+        >
+          <div *ngIf="!database.workingDone && !database.workingProcessRunning">
+            <p>Update</p>
+          </div>
+          <div *ngIf="database.workingDone && !database.workingProcessRunning">
+            <p>Done!</p>
+          </div>
+
+          <div *ngIf="database.workingProcessRunning">
+            <mat-spinner diameter="35"></mat-spinner>
+          </div>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
