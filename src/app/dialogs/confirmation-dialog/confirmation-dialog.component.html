@@ -2,14 +2,38 @@
   <h2 class="text-h2 mb-0">Are you sure ?</h2>
   <p class="text-red">Deleted Tasks ar lost forerver.</p>
   <div class="w-full h-14 flex justify-end items-end gap-2">
-    <button mat-dialog-close mat-raised-button>Cancle</button>
     <button
+      [disabled]="database.workingProcessRunning"
+      [ngClass]="{
+        'bg-blue-100': database.workingDone,
+        'text-white-100': database.workingDone
+      }"
+      mat-dialog-close
+      mat-raised-button
+    >
+      <div *ngIf="!database.workingDone">Cancle</div>
+      <div *ngIf="database.workingDone">Close</div>
+    </button>
+    <button
+      [disabled]="database.workingDone"
+      [ngClass]="{
+        'bg-red': !database.workingDone
+      }"
+      class="text-white-100"
       (click)="database.removeTask(data.path, data.id)"
       type="submit"
       mat-raised-button
-      color="warn"
     >
-      <mat-spinner></mat-spinner>
+      <div *ngIf="!database.workingDone">
+        <p>Delete</p>
+      </div>
+      <div *ngIf="database.workingDone && !database.workingProcessRunning">
+        <p>Done!</p>
+      </div>
+
+      <div *ngIf="database.workingProcessRunning">
+        <mat-spinner diameter="35"></mat-spinner>
+      </div>
     </button>
   </div>
 </div>

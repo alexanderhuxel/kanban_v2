@@ -14,8 +14,5 @@ export class ConfirmationDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: { path: string; id: string }
   ) {}
 
-  ngOnInit(): void {
-    console.log(this.data.id);
-    console.log(this.data.path);
-  }
+  ngOnInit(): void {}
 }
