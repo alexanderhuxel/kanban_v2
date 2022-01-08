@@ -21,18 +21,18 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatDialogModule } from '@angular/material/dialog';
-import { AddTasktoRowComponent } from './dialogs/add-taskto-row/add-taskto-row.component';
+import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog/confirmation-dialog.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { EditTaskDialogComponent } from './dialogs/edit-task-dialog/edit-task-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
     BoardComponent,
     HelpComponent,
     AddTaskComponent,
-    AddTasktoRowComponent,
     ConfirmationDialogComponent,
+    EditTaskDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +55,12 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: MAT_DIALOG_DATA,
+      useValue: {},
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
