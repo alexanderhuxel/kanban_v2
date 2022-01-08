@@ -10,3 +10,7 @@ ul {
     @apply pl-0;
   }
 }
+mat-progress-spinner circle,
+.mat-spinner circle {
+  stroke: white;
+}
