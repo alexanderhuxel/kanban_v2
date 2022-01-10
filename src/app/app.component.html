@@ -1,38 +1,29 @@
 <mat-drawer-container class="example-container h-screen">
-  <mat-drawer class="bg-blue-200" mode="side" opened>
-    <div class="flex flex-col items-center">
-      <div
-        class="
-          w-6
-          h-6
-          transform
-          rotate-45
-          bg-white-100
-          my-6
-          flex
-          items-center
-          justify-center
-        "
-      >
-        Logo
-      </div>
+  <mat-drawer
+    class="bg-primary-100 border-r border-white-400"
+    mode="side"
+    opened
+  >
+    <div class="flex h-full py-2 px-2 flex-col items-center">
+      <img
+        class="w-5 h-5 mb-4 object-cover rounded-full border-2 border-white-400"
+        src="./assets/about.jpg"
+        alt=""
+      />
       <ul class="list-none">
-        <li class="px-5 mb-3">
+        <li class="mb-3">
           <a class="flex" routerLink="board">
-            <fa-icon class="mr-2 text-white-100" [icon]="faList"></fa-icon>
-            <p class="text-white-100">List</p>
+            <img class="w-5 h-5" src="./assets/list.svg" alt="list" />
           </a>
         </li>
-        <li class="px-5 mb-3">
+        <li class="mb-3">
           <a class="flex" routerLink="addtask">
-            <fa-icon class="mr-2 text-white-100" [icon]="faList"></fa-icon>
-            <p class="text-white-100">add ToDo</p>
+            <img class="w-5 h-5" src="./assets/list.svg" alt="list" />
           </a>
         </li>
-        <li class="px-5">
+        <li class="">
           <a class="flex" routerLink="help">
-            <fa-icon class="mr-2 text-white-100" [icon]="faList"></fa-icon>
-            <p class="text-white-100">Help</p>
+            <img class="w-5 h-5" src="./assets/list.svg" alt="list" />
           </a>
         </li>
       </ul>

@@ -25,6 +25,9 @@ import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from './dialogs/confirmation-dialog/confirmation-dialog.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { EditTaskDialogComponent } from './dialogs/edit-task-dialog/edit-task-dialog.component';
+import { MatBadgeModule } from '@angular/material/badge';
+import { SingleTaskComponent } from './components/single-task/single-task.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,6 +36,7 @@ import { EditTaskDialogComponent } from './dialogs/edit-task-dialog/edit-task-di
     AddTaskComponent,
     ConfirmationDialogComponent,
     EditTaskDialogComponent,
+    SingleTaskComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +53,7 @@ import { EditTaskDialogComponent } from './dialogs/edit-task-dialog/edit-task-di
     MatDialogModule,
     MatButtonModule,
     MatIconModule,
+    MatBadgeModule,
     MatTooltipModule,
     MatProgressSpinnerModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),

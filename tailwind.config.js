@@ -14,113 +14,100 @@
  * https://tailwindcss.com/docs/adding-base-styles#using-a-plugin
  */
 
-const globalStyles = ({ addBase, config, theme }) => {
+const globalStyles = ({ addBase, theme }) => {
   addBase({
     "p, a, li": {
-      fontSize: config("theme.fontSize.base[0]"),
-      lineHeight: config("theme.fontSize.base[1]"),
-      color: config("theme.colors.blue.DEFAULT"),
+      fontSize: theme("fontSize.base[0]"),
+      lineHeight: theme("fontSize.base[1]"),
+      color: theme("colors.secondary.DEFAULT"),
+      fontWeight: theme("fontWeight.light"),
     },
-    "h1, .text-h1, h2, .text-h2, h3, .text-h3, h4, .text-h4, h5, .text-h5, .text-h1-mobile":
+    ".text-h1, h2, .text-h2, h3, .text-h3, h4, .text-h4, h5, .text-h5, h6, .text-h6":
       {
-        color: config("theme.colors.blue.DEFAULT"),
-        marginBottom: config("theme.margin.5"),
-        hyphens: config("theme.hyphens.auto"),
+        // color: theme('colors.secondary.DEFAULT'),
+        marginBottom: theme("margin.2"),
       },
     "h1, .text-h1": {
-      fontSize: config("theme.fontSize.h1[0]"),
-      lineHeight: config("theme.fontSize.h1[1]"),
-      fontFamily: config("theme.fontFamily.roadrage"),
+      fontSize: theme("fontSize.h1[0]"),
+      lineHeight: theme("fontSize.h1[1]"),
+      fontWeight: theme("fontWeight.bold"),
     },
     ".text-h1-mobile": {
-      fontSize: theme("fontSize.h1mobile[0]"),
-      lineHeight: theme("fontSize.h1mobile[1]"),
-      fontFamily: config("theme.fontFamily.roadrage"),
-    },
-    ".text-h2-mobile": {
-      fontSize: theme("fontSize.h1mobile[0]"),
-      lineHeight: theme("fontSize.h1mobile[1]"),
-      fontFamily: config("theme.fontFamily.sans"),
-      fontWeight: config("theme.fontWeight.bold"),
+      fontSize: theme("fontSize.h1-mobile[0]"),
+      lineHeight: theme("fontSize.h1-mobile[1]"),
+      fontWeight: theme("fontWeight.bold"),
     },
     "h2, .text-h2": {
-      fontSize: config("theme.fontSize.h2[0]"),
-      lineHeight: config("theme.fontSize.h2[1]"),
-      fontFamily: config("theme.fontFamily.sans"),
-      fontWeight: config("theme.fontWeight.bold"),
+      fontSize: theme("fontSize.h2[0]"),
+      lineHeight: theme("fontSize.h2[1]"),
+      fontWeight: theme("fontWeight.normal"),
     },
     "h3, .text-h3": {
-      fontSize: config("theme.fontSize.h3[0]"),
-      lineHeight: config("theme.fontSize.h3[1]"),
-      fontFamily: config("theme.fontFamily.sans"),
-      fontWeight: config("theme.fontWeight.bold"),
+      fontSize: theme("fontSize.h3[0]"),
+      lineHeight: theme("fontSize.h3[1]"),
+      fontWeight: theme("fontWeight.bold"),
     },
     "h4, .text-h4": {
-      fontSize: config("theme.fontSize.h4[0]"),
-      lineHeight: config("theme.fontSize.h4[1]"),
-      fontFamily: config("theme.fontFamily.sans"),
-      fontWeight: config("theme.fontWeight.bold"),
+      fontSize: theme("fontSize.h4[0]"),
+      lineHeight: theme("fontSize.h4[1]"),
+      fontWeight: theme("fontWeight.bold"),
     },
     "h5, .text-h5": {
-      fontSize: config("theme.fontSize.h5[0]"),
-      lineHeight: config("theme.fontSize.h5[1]"),
-      fontFamily: config("theme.fontFamily.sans"),
-      fontWeight: config("theme.fontWeight.bold"),
+      fontSize: theme("fontSize.h5[0]"),
+      lineHeight: theme("fontSize.h5[1]"),
+      fontWeight: theme("fontWeight.bold"),
     },
     "h6, .text-h6": {
-      fontSize: config("theme.fontSize.h6[0]"),
-      lineHeight: config("theme.fontSize.h6[1]"),
-      fontFamily: config("theme.fontFamily.sans"),
-      fontWeight: config("theme.fontWeight.bold"),
+      fontSize: theme("fontSize.h6[0]"),
+      lineHeight: theme("fontSize.h6[1]"),
+      fontWeight: theme("fontWeight.bold"),
     },
-    ".item, .text-item": {
-      fontSize: config("theme.fontSize.item[0]"),
-      lineHeight: config("theme.fontSize.item[1]"),
-      fontFamily: config("theme.fontFamily.sans"),
+    ".intro, .text-intro": {
+      fontSize: theme("fontSize.intro[0]"),
+      lineHeight: theme("fontSize.intro[1]"),
+      fontWeight: theme("fontWeight.light"),
+    },
+    ".body, .text-body": {
+      fontSize: theme("fontSize.base[0]"),
+      lineHeight: theme("fontSize.base[1]"),
+      fontWeight: theme("fontWeight.light"),
+    },
+    ".button, .text-button": {
+      fontSize: theme("fontSize.button[0]"),
+      lineHeight: theme("fontSize.button[1]"),
+      fontWeight: theme("fontWeight.bold"),
+    },
+    ".small-link, .text-small-link": {
+      fontSize: theme("fontSize.small-link[0]"),
+      lineHeight: theme("fontSize.small-link[1]"),
+      textDecoration: theme("textDecoration.underline"),
     },
     ".overline, .text-overline": {
-      fontSize: config("theme.fontSize.overline[0]"),
-      lineHeight: config("theme.fontSize.overline[1]"),
-      fontFamily: config("theme.fontFamily.sans"),
+      fontSize: theme("fontSize.overline[0]"),
+      lineHeight: theme("fontSize.overline[1]"),
       textTransform: "uppercase",
-      letterSpacing: config("theme.letterSpacing.tight"),
+      letterSpacing: theme("letterSpacing.tight"),
+    },
+    ".label, .text-label": {
+      fontSize: theme("fontSize.label[0]"),
+      lineHeight: theme("fontSize.label[1]"),
     },
     ".caption, .text-caption": {
-      fontSize: config("theme.fontSize.caption[0]"),
-      lineHeight: config("theme.fontSize.caption[1]"),
-      fontFamily: config("theme.fontFamily.sans"),
-    },
-    ".huge, .text-huge": {
-      fontSize: config("theme.fontSize.huge[0]"),
-      lineHeight: config("theme.fontSize.huge[1]"),
-      fontFamily: config("theme.fontFamily.sans"),
-    },
-    ".button, .text-button, .btn": {
-      fontSize: config("theme.fontSize.base[0]"),
-      lineHeight: config("theme.fontSize.base[1]"),
-      fontFamily: config("theme.fontFamily.sans"),
-      fontWeight: config("theme.fontWeight.bold"),
-    },
-    ".button-small, .text-button-small": {
-      fontSize: config("theme.fontSize.buttonsmall[0]"),
-      lineHeight: config("theme.fontSize.buttonsmall[1]"),
-      fontFamily: config("theme.fontFamily.sans"),
-      fontWeight: config("theme.fontWeight.bold"),
-      textTransform: "uppercase",
+      fontSize: theme("fontSize.caption[0]"),
+      lineHeight: theme("fontSize.caption[1]"),
     },
     ol: { listStyleType: "decimal" },
     ul: { listStyleType: "disc" },
     "ol, ul": {
-      paddingLeft: config("theme.padding.2"),
-      marginBottom: config("theme.margin.2"),
+      paddingLeft: theme("padding.2"),
+      marginBottom: theme("margin.2"),
     },
     li: {
-      paddingLeft: config("theme.padding.1"),
-      marginBottom: config("theme.margin.1"),
+      paddingLeft: theme("padding.1"),
+      marginBottom: theme("margin.1"),
     },
     figcaption: {
-      color: config("theme.colors.blue.500"),
-      fontFamily: config("theme.fontFamily.sans"),
+      color: theme("colors.gray.400"),
     },
   });
 };
@@ -140,10 +127,26 @@ module.exports = {
   },
   theme: {
     colors: {
+      primary: {
+        100: "#222a45",
+        200: "#293250",
+        300: "#18203c",
+        400: "#323d5f",
+      },
+      secondary: {
+        100: "#34abba",
+      },
+      border: {
+        green: "#5cc976",
+        orange: "#f5ab42",
+        red: "#e1465b",
+        white: "#7c8790",
+      },
       white: {
         100: "#ffffff",
         200: "#FCFDFE",
         300: "#E5E5E5",
+        400: "#d8d9de",
       },
 
       black: {
@@ -172,21 +175,17 @@ module.exports = {
     fontFamily: {
       sans: "century-gothic, sans-serif",
       serif: "Libre Baskerville, serif",
-      roadrage: "roadrage",
-      deathrattle: "deathrattle",
-      quicksand: "Quicksand",
     },
     fontSize: {
-      h1: ["4rem", { lineHeight: "6.375rem" }],
-      h2: ["2.25rem", { lineHeight: "3.5rem" }],
-      h3: ["2.25rem", { lineHeight: "3.5rem" }],
-      h4: ["1.5rem", { lineHeight: "2.5rem" }],
-      // h5: ['1.125rem', { lineHeight: '1.5rem' }],
-      // h6: ['0.875rem', { lineHeight: '1rem' }],
-      body: ["1rem", { lineHeight: "2rem" }],
-      footer: ["1rem", { lineHeight: "1.5rem" }],
-      button: ["1rem", { lineHeight: "2.25rem" }],
-      mobileMenu: ["0.7rem", { lineHeight: "1rem" }],
+      h1: ["3.5rem", { lineHeight: "4rem" }],
+      h2: ["1.875rem", { lineHeight: "2.5rem" }],
+      h3: ["1.5rem", { lineHeight: "1.5rem" }],
+      h4: ["1.125rem", { lineHeight: "1.5rem" }],
+      base: ["0.9375rem", { lineHeight: "1.5rem" }],
+      subtitel: ["1.25rem", { lineHeight: "1.5rem" }],
+      button: ["1rem", { lineHeight: "1.5rem" }],
+      overline: ["0.75rem", { lineHeight: "1rem" }],
+      caption: ["0.75rem", { lineHeight: "1rem" }],
     },
     fontWeight: {
       light: "300",
@@ -249,6 +248,8 @@ module.exports = {
       2: "2px",
       3: "3px",
       4: "4px",
+      6: "6px",
+      8: "8px",
     },
     borderRadius: {
       DEFAULT: "16px",
@@ -272,10 +273,10 @@ module.exports = {
     extend: {
       maxWidth: {
         container: "1440px",
-        32: "256px",
+        custom: "372px",
       },
       minWidth: {
-        custom: "352px",
+        custom: "372px",
       },
       minHeight: {
         0: "0",
@@ -297,5 +298,6 @@ module.exports = {
     // require('@tailwindcss/aspect-ratio'),
     // require('@tailwindcss/forms'),
     // require('tailwindcss-hyphens'),
+    // https://heroicons.com/
   ],
 };

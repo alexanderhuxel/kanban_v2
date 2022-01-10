@@ -18,13 +18,14 @@ import { Task } from 'src/models/task';
 export class DatabaseService {
   constructor(private firestore: Firestore) {}
   Task: Task = new Task();
-  maxTask = false;
   workingProcessRunning = false;
   workingDone = false;
   DialogOpen = false;
-  firstRowArray: any = [];
-  secondRowArray: any = [];
-  thirdRowArray: any = [];
+  DATABASE: any = {
+    column_1: [],
+    column_2: [],
+    column_3: [],
+  };
 
   getBoard(path: string) {
     const collectionRef = collection(
@@ -48,17 +49,13 @@ export class DatabaseService {
       this.firestore,
       'teamBoardAlex/board/' + path
     );
-    if (this.secondRowArray.length == 3 && path == 'in Progress') {
-      this.maxTask = true;
+
+    this.workingProcessRunning = true;
+    addDoc(collectionRef, Task.objectToJSON()).then(() => {
+      this.workingProcessRunning = false;
+      this.workingDone = true;
       return;
-    } else {
-      this.workingProcessRunning = true;
-      addDoc(collectionRef, Task.objectToJSON()).then(() => {
-        this.workingProcessRunning = false;
-        this.workingDone = true;
-        return;
-      });
-    }
+    });
   }
 
   removeTask(path: string, id: string) {
@@ -96,18 +93,21 @@ export class DatabaseService {
     });
   }
 
+  getArray(path: number) {
+    let result = this.DATABASE.column_ + { path };
+    return result;
+  }
+
   firstRow = this.getBoard('To Do').subscribe((result) => {
-    this.firstRowArray = result;
-    console.log(this.firstRowArray);
+    this.DATABASE.column_1 = result;
   });
 
   SecondRow = this.getBoard('in Progress').subscribe((result) => {
-    this.secondRowArray = result;
-    console.log(this.secondRowArray);
+    this.DATABASE.column_2 = result;
   });
 
   ThirdRow = this.getBoard('Done').subscribe((result) => {
-    this.thirdRowArray = result;
-    console.log(this.thirdRowArray);
+    this.DATABASE.column_3 = result;
+    console.log(this.DATABASE);
   });
 }

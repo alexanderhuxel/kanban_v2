@@ -15,6 +15,7 @@ import { TimeService } from 'src/app/services/time.service';
 export class BoardComponent implements OnInit {
   faPlus = faPlus;
   task: Task = new Task();
+
   constructor(
     public database: DatabaseService,
     public dialog: MatDialog,
@@ -29,7 +30,6 @@ export class BoardComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(() => {
       this.database.workingDone = false;
-      this.database.maxTask = false;
       this.database.DialogOpen = false;
     });
   }
