@@ -1,6 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @tailwind base;
 @tailwind components;
+
+.customlabel {
+  @apply absolute text-max tracking-widest left-[12px] -top-[7px] transition-all pointer-events-none px-0.5 bg-primary-400 text-caption;
+  @apply peer-placeholder-shown:top-[10px] peer-placeholder-shown:text-base peer-placeholder-shown:px-0 peer-placeholder-shown:text-white-400;
+}
+.custominput {
+  @apply rounded-small p-1 tracking-widest text-white-400 border placeholder-transparent focus-visible:outline-none border-white-400 text-base bg-primary-400;
+}
+
 @tailwind utilities;
 
 ul {
@@ -10,7 +19,35 @@ ul {
     @apply pl-0;
   }
 }
+
+.mat-dialog-container {
+  border-radius: 12px !important;
+  @apply bg-primary-400;
+}
+
+.mat-button-wrapper {
+  @apply text-white-400;
+}
+
+.mat-form-field {
+  @apply text-max;
+
+  .mat-input-element {
+    @apply caret-max;
+  }
+
+  label {
+    @apply text-max text-opacity-50;
+  }
+}
+
+// TODO: FORM STYLE
+
 mat-progress-spinner circle,
 .mat-spinner circle {
   stroke: white;
+}
+
+.mainHeigth {
+  height: calc(100vh - 94px);
 }

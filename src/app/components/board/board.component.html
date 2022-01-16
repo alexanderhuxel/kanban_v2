@@ -1,5 +1,6 @@
 <div class="bg-primary-200 h-full relative">
   <button
+    (click)="openDialog('', false)"
     matTooltip="add Task"
     class="bg-secondary-100 px-2 py-1 rounded-smaller absolute right-5 bottom-5"
   >
@@ -17,28 +18,146 @@
   >
     View:
   </h2>
-  <div *ngFor="let row of database.DATABASE.column_1">
-    <div class="flex h-screen bg-primary-300">
-      <div
-        class="h-full min-w-custom max-w-custom border-r border-white-400 px-3"
-      >
+  <div class="flex mainHeigth bg-primary-300">
+    <div
+      class="border-r h-full border-white-400"
+      *ngFor="let row of board | keyvalue"
+    >
+      <div class="h-full min-w-custom max-w-custom px-3">
         <div class="flex justify-between mx-3 mt-3 mb-5">
-          <p
-            matBadgeOverlap="false"
-            matBadge="{{ database.DATABASE.column_1.length }}"
-            class="text-white-100"
-          >
-            Backlog
+          <p matBadgeOverlap="false" matBadge="1" class="text-white-100">
+            <!-- FIXME: length  -->
+            {{ globalFunctions.updateName(row.key) }}
           </p>
           <button
-            (click)="openDialog('To Do')"
+            (click)="openDialog(row.key, true)"
             matTooltip="add Task"
             class="rounded-full border-secondary-100 border-2 p-0.25"
           >
             <img class="w-2.5 h-2.5" src="./assets/plus.svg" alt="plus" />
           </button>
         </div>
-        <app-single-task></app-single-task>
+        <div
+          *ngFor="let item of row.value"
+          [ngClass]="{
+            'border-border-green': item.importance == 'Medium',
+            'border-border-orange': item.importance == 'High',
+            'border-border-red': item.importance == 'Super High',
+            'border-border-white': item.importance == 'Low'
+          }"
+          class="bg-primary-400 rounded-button mb-2 border-l-6"
+        >
+          <div class="p-2 border-b border-white-400">
+            <div class="flex justify-between">
+              <span>
+                <p
+                  (click)="item.editOnProgress = true"
+                  *ngIf="!item.editOnProgress"
+                  class="text-white-100 text-h4 mb-0 hover:cursor-pointer"
+                >
+                  {{ item.title }}
+                </p>
+                <input
+                  *ngIf="item.editOnProgress"
+                  class="text-max bg-primary-400 border border-white-100 rounded-button p-0.25 outline-none text-h4 mb-0 max-w-[200px]"
+                  [(ngModel)]="item.title"
+                  value="{{ item.title }}"
+                  type="text"
+                />
+                <p class="text-white-400 text-caption mb-2">Assigned to you</p>
+              </span>
+              <div
+                [ngClass]="{
+                  'bg-border-green': item.importance == 'Medium',
+                  'bg-border-orange': item.importance == 'High',
+                  'bg-border-red': item.importance == 'Super High',
+                  'bg-border-white': item.importance == 'Low'
+                }"
+                class="bg-opacity-50 flex justify-center items-center rounded-full h-5 w-5"
+              >
+                <p
+                  [ngClass]="{
+                    'text-border-green': item.importance == 'Medium',
+                    'text-border-orange': item.importance == 'High',
+                    'text-border-red': item.importance == 'Super High',
+                    'text-border-white': item.importance == 'Low'
+                  }"
+                >
+                  91
+                </p>
+              </div>
+            </div>
+            <div *ngIf="item.editOnProgress" class="relative">
+              <textarea
+                class="text-max resize-none border border-white-100 rounded-button p-0.25 outline-none bg-primary-400 w-full text-caption"
+                type="text"
+                [(ngModel)]="item.description"
+              ></textarea>
+              <button
+                (click)="this.database.updateTask(item, row.key, item.id)"
+                class="bg-primary-400 text-white-100 border border-white-100 p-0.5 rounded-small absolute -bottom-0.5 -right-0.5 text-caption"
+              >
+                Update
+              </button>
+            </div>
+
+            <p
+              (click)="item.editOnProgress = true"
+              *ngIf="!item.editOnProgress"
+              class="text-white-100 text-caption hover:cursor-pointer border border-transparent p-0.25 hover:border hover:border-white-100"
+            >
+              {{ item.description }}
+            </p>
+          </div>
+          <div class="flex justify-between py-1 px-2">
+            <a href="#">
+              <img class="w-2.5 h-2.5" src="./assets/notes.svg" alt="notes" />
+            </a>
+            <a class="flex" href="#">
+              <img
+                class="w-2.5 h-2.5 mr-0.5"
+                src="./assets/user.svg"
+                alt="notes"
+              />
+              <p class="text-white-400">2</p>
+            </a>
+            <a class="flex" href="#">
+              <img
+                class="w-2.5 h-2.5 mr-1"
+                src="./assets/date.svg"
+                alt="notes"
+              />
+              <p class="text-white-400">
+                {{ globalFunctions.generateTime(item.date.seconds) }}
+              </p>
+            </a>
+            <span class="text-white-400 flex" href="#">
+              <img
+                (click)="
+                  database.removeTask(
+                    globalFunctions.updateName(row.key),
+                    item.id
+                  )
+                "
+                [ngClass]="{
+                  'opacity-0': !item.deleteOpen,
+                  'pointer-events-none': !item.deleteOpen
+                }"
+                class="w-2.5 h-2.5 p-0.25 mr-1 rounded-full border border-white-400 hover:cursor-pointer"
+                matTooltip="confirm delete Task"
+                src="./assets/check.svg"
+                alt="notes"
+              />
+              <img
+                (click)="item.deleteOpen = !item.deleteOpen"
+                class="w-2.5 h-2.5 p-0.25 rounded-full border border-white-400 hover:cursor-pointer"
+                matTooltip="delete Task"
+                src="./assets/delete.svg"
+                alt="notes"
+              />
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -9,6 +9,7 @@ import {
 } from '@angular/fire/firestore';
 import { collection, doc } from 'firebase/firestore';
 import { Task } from 'src/models/task';
+import { GlobalFunctionsService } from './global-functions.service';
 
 // TODO: add logic to chaneg Row dynamicli
 
@@ -16,21 +17,24 @@ import { Task } from 'src/models/task';
   providedIn: 'root',
 })
 export class DatabaseService {
-  constructor(private firestore: Firestore) {}
+  To_Do: any;
+  constructor(
+    private firestore: Firestore,
+    private globalFunctions: GlobalFunctionsService
+  ) {}
   Task: Task = new Task();
   workingProcessRunning = false;
   workingDone = false;
   DialogOpen = false;
   DATABASE: any = {
-    column_1: [],
-    column_2: [],
-    column_3: [],
+    To_Do: [],
+    in_Progress: [],
   };
 
   getBoard(path: string) {
     const collectionRef = collection(
       this.firestore,
-      'teamBoardAlex/board/' + path
+      'teamBoardAlex/board/' + this.globalFunctions.updateName(path)
     );
     return collectionData(collectionRef, { idField: 'id' });
   }
@@ -38,7 +42,7 @@ export class DatabaseService {
   getTaskByID(path: string, id: string) {
     const collectionDocRef = doc(
       this.firestore,
-      `teamBoardAlex/board/${path}/${id}`
+      `teamBoardAlex/board/${this.globalFunctions.updateName(path)}/${id}`
     );
     return docData(collectionDocRef, { idField: 'id' });
   }
@@ -47,7 +51,7 @@ export class DatabaseService {
   addToDatabase(Task: Task, path: string) {
     const collectionRef = collection(
       this.firestore,
-      'teamBoardAlex/board/' + path
+      'teamBoardAlex/board/' + this.globalFunctions.updateName(path)
     );
 
     this.workingProcessRunning = true;
@@ -61,53 +65,31 @@ export class DatabaseService {
   removeTask(path: string, id: string) {
     const collectionRef = doc(
       this.firestore,
-      `teamBoardAlex/board/${path}/${id}`
+      `teamBoardAlex/board/${this.globalFunctions.updateName(path)}/${id}`
     );
-    deleteDoc(collectionRef).then(() => {
-      this.workingProcessRunning = true;
-      this.workingDone = true;
-      setTimeout(() => {
-        this.workingProcessRunning = false;
-        return;
-      }, 1000);
-    });
+    deleteDoc(collectionRef);
   }
 
   updateTask(Task: Task, path: string, id: string) {
     const CollectionDocRef = doc(
       this.firestore,
-      `teamBoardAlex/board/${path}/${id}`
+      `teamBoardAlex/board/${this.globalFunctions.updateName(path)}/${id}`
     );
     updateDoc(CollectionDocRef, {
       title: Task.title,
       description: Task.description,
       date: Task.description,
       importance: Task.importance,
-    }).then(() => {
-      this.workingProcessRunning = true;
-      this.workingDone = true;
-      setTimeout(() => {
-        this.workingProcessRunning = false;
-        return;
-      }, 1000);
+      id: Task.id,
+      attached: Task.attached,
     });
   }
 
-  getArray(path: number) {
-    let result = this.DATABASE.column_ + { path };
-    return result;
-  }
-
   firstRow = this.getBoard('To Do').subscribe((result) => {
-    this.DATABASE.column_1 = result;
+    this.DATABASE.To_Do = result;
   });
 
   SecondRow = this.getBoard('in Progress').subscribe((result) => {
-    this.DATABASE.column_2 = result;
-  });
-
-  ThirdRow = this.getBoard('Done').subscribe((result) => {
-    this.DATABASE.column_3 = result;
-    console.log(this.DATABASE);
+    this.DATABASE.in_Progress = result;
   });
 }

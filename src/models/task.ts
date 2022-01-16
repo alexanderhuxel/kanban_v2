@@ -4,8 +4,10 @@ export class Task {
   description: string;
   date: string;
   importance: string;
-  done: boolean;
   id: string;
+  attached: [];
+  deleteopen: boolean;
+  editOnProgress: boolean;
 
   constructor(obj?: any) {
     this.title = obj ? obj.title : '';
@@ -13,8 +15,10 @@ export class Task {
     this.description = obj ? obj.description : '';
     this.date = obj ? obj.date : '';
     this.importance = obj ? obj.importance : '';
-    this.done = obj ? obj.done : '';
     this.id = obj ? obj.id : '';
+    this.attached = [];
+    this.deleteopen = false;
+    this.editOnProgress = true;
   }
 
   objectToJSON() {
@@ -24,8 +28,10 @@ export class Task {
       description: this.description,
       date: this.date,
       importance: this.importance,
-      done: false,
       id: this.id,
+      attached: this.attached,
+      deleteopen: this.deleteopen,
+      editOnProgress: this.deleteopen,
     };
   }
 }

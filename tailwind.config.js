@@ -127,6 +127,7 @@ module.exports = {
   },
   theme: {
     colors: {
+      current: "currentColor",
       primary: {
         100: "#222a45",
         200: "#293250",
